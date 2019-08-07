@@ -11,8 +11,8 @@ wss.on('connection', function (ws) {
     msgSer.putws(ws);  //第一次链接的是时候会分配key
     
     ws.on('message', function (message) {
-        // 广播消息
-        msgSer.putmsg(message);
+        msgSer.checkWebsocket(message) === false ? ws.close() : msgSer.putmsg(message);
+        //发现消息包不对就关闭这个websocket连接
     });
 
     ws.on('close', function (message) {

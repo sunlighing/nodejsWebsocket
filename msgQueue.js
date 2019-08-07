@@ -27,15 +27,15 @@ function msgQueue() {
     let items = [];
 
     this.enqueue = function (data) {
-        
+        console.log("recive the msg is ok")
         items.push(data);
-        this.publicSend("dd");
-
+       // this.publicSend("dd");
+         
     };
 
     this.publicSend = function(msg){
 
-        msgserver.publicData(data);
+        msgserver.publicData(msg);
     }
 
     this.privateSend = function(key,data){

@@ -50,6 +50,15 @@ function msgServer(){
         msgQue.enqueue(data);
     }
 
+    this.checkWebsocket = function(msg){  //有漏洞如果别人冒用的话会有问题
+        let data = JSON.parse(msg);
+        if (wsPool.get(data.uid) === undefined ){
+            return false
+        }else {
+            return true 
+        }
+    }
+
     this.publicData = function(msg){ //广播
         console.log("广播消息,连接池总数==>", )
         
@@ -62,7 +71,7 @@ function msgServer(){
     this.Privatedata = function(key,data){
         let ws = wsPool.get(key);
         console.log("ws");
-        console.log(ws)
+        
         ws.send(JSON.stringify(data));
     }
 
