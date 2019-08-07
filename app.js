@@ -8,7 +8,7 @@ msgSer.init(); //消息队列初始化
 
 wss.on('connection', function (ws) {
     // 将该连接加入连接池
-    msgSer.putws(ws);
+    msgSer.putws(ws);  //第一次链接的是时候会分配key
     
     ws.on('message', function (message) {
         // 广播消息

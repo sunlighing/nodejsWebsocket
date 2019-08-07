@@ -1,4 +1,4 @@
-var msgServer = require("./msgServer");
+
 
 function msgQueue() {
     //这里是属性和方法
@@ -30,11 +30,16 @@ function msgQueue() {
         
         items.push(data);
         this.publicSend("dd");
+
     };
 
     this.publicSend = function(msg){
 
         msgserver.publicData(data);
+    }
+
+    this.privateSend = function(key,data){
+        msgserver.Privatedata(key,data);
     }
 
     this.dequeue = function () {
