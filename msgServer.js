@@ -23,7 +23,7 @@ function msgServer(){
     this.putws = function(ws) {
         let key = que.front()  //取第一个
         que.dequeue();        //移除第一个
-        //这样有个问题就是当队列位空时， 就连接不上了
+        //这样有个问题就是当队列位空时， 就连接上了
         if (wsPool.get(key) === undefined) {
             wsPool.set(key, ws);
             let data = {
@@ -55,16 +55,15 @@ function msgServer(){
     this.publicData = function(msg) {
     //广播
     console.log("data all public send");
-    wsPool
-        .values()
-        .forEach(function(ws, index) {
+    wsPool.values().forEach(function(ws, index) {
         let data = JSON.stringify(msg);
             ws.send(data);
         });
     };
 
     this.Privatedata = function(key,data) {
-        console.log("msg data send");
+        console.log("msg data send",key);
+        
         let ws = wsPool.get(key);
         ws.send(JSON.stringify(data));
     };
@@ -81,6 +80,10 @@ function msgServer(){
         }
 
     };
+
+    this.getMsgQue = function (){  //利用闭包
+        return msgQue;
+    }
 }
 
 module.exports = msgServer;

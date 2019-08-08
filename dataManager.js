@@ -27,10 +27,11 @@ function dataManager(msgServer,gamserver){
     this.gamser = gamserver;
     
     this.dealWithData = function(){
-        let data = msgServer.msgQue.front()
-        msgServer.msgQue.dequeue(); 
+       
+        let data = msgServer.getMsgQue().front();
+        msgServer.getMsgQue().dequeue(); 
         let tempdata = gamserver.dataset(data);
-        msgServer.msgQue.privateSend(tempdata);
+        msgServer.getMsgQue().privateSend(data.uid,tempdata);
     }
 }
 

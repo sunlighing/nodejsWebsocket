@@ -9,10 +9,13 @@ var WebSocketServer = require('ws').Server,
 var gameManage = require('./gameServerUse')
 var gameMan = new gameManage();
 
+
+msgSer.init(); //消息队列先初始化
+
 var dataManage = require("./dataManager");
 var dataMana = new dataManage(msgSer, gameMan);
 
-msgSer.init(); //消息队列初始化
+
 
 
 
@@ -20,7 +23,13 @@ wss.on('connection', function (ws) {
     msgSer.putws(ws);  //第一次链接的是时候会分配key
     
     ws.on('message', function (message) {
-        msgSer.checkWebsocket(message) === false? msgSer.delectWs(ws) : msgSer.putmsg(message);
+
+        if (msgSer.checkWebsocket(message) === false){
+            msgSer.delectWs(ws)
+        }else{
+            msgSer.putmsg(message)
+            dataMana.dealWithData();
+        }
         //发现消息包不对就关闭这个websocket连接
     });
 
