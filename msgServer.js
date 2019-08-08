@@ -23,7 +23,7 @@ function msgServer(){
     this.putws = function(ws) {
         let key = que.front()  //取第一个
         que.dequeue();        //移除第一个
-        //这样有个问题就是当队列位空时， 就连接补上了
+        //这样有个问题就是当队列位空时， 就连接不上了
         if (wsPool.get(key) === undefined) {
             wsPool.set(key, ws);
             let data = {

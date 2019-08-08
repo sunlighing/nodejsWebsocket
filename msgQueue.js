@@ -27,7 +27,7 @@ function msgQueue() {
     this.privateSend = function(key,data){
 
         msgserver.Privatedata(key,data);
-        
+
     }
 
     this.dequeue = function () {
@@ -46,9 +46,6 @@ function msgQueue() {
         return items.length;
     };
 
-    this.print = function () {
-        console.log(items.toString());
-    };
 }
 
 module.exports = msgQueue;
