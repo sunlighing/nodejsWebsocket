@@ -5,6 +5,13 @@ var WebSocketServer = require('ws').Server,
     wss = new WebSocketServer({ port: 8080 });
 
 
+
+var gameManage = require('./gameServerUse')
+var gameMan = new gameManage();
+
+var dataManage = require("./dataManager");
+var dataMana = new dataManage(msgSer, gameMan);
+
 msgSer.init(); //消息队列初始化
 
 

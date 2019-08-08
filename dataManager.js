@@ -22,8 +22,16 @@
  *            }
  */
 
-function dataManager(){
+function dataManager(msgServer,gamserver){
+    this.msgSer = msgServer;
+    this.gamser = gamserver;
     
+    this.dealWithData = function(){
+        let data = msgServer.msgQue.front()
+        msgServer.msgQue.dequeue(); 
+        let tempdata = gamserver.dataset(data);
+        msgServer.msgQue.privateSend(tempdata);
+    }
 }
 
 module.exports = dataManager;
