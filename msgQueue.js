@@ -2,7 +2,6 @@
  * 收发消息管理
  * 消息队列类
  */
-
 function msgQueue() {
     //这里是属性和方法
     let msgserver = null
@@ -12,15 +11,12 @@ function msgQueue() {
         //初始化成功
     }
 
-
     let items = [];
 
     this.enqueue = function (data) {   //
         console.log("recive the msg is ok")
         items.push(data);
     };
-
-
 
     this.publicSend = function(msg){
 
@@ -31,6 +27,7 @@ function msgQueue() {
     this.privateSend = function(key,data){
 
         msgserver.Privatedata(key,data);
+        
     }
 
     this.dequeue = function () {
