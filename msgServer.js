@@ -1,29 +1,16 @@
 /**
- * 数据包结构:
- *      收: data{
- *                uid: 用户名
- *                act: 用户行为
- *                
- *            }
- *      发: data{
- *                uid: 00000
- *                name:用户名
- *                act: 用户行为
- *                public: {
- *                          user:{  
- *                                  name:
- *                                  act:
- *                                  msg:
- *                              } 
- *                        }
- *            }
+ * author:Dragon Chuan
+ * function manager ws 
+ * websoket 管理类 
  */
 var msgQueue = require("./msgQueue")
 var Dic = require('./lib/Dictionary')
 
-var msgQue = new msgQueue();
+
 
 function msgServer(){
+
+    var msgQue = new msgQueue();
 
     let wsPool = new Dic()
 
@@ -60,18 +47,16 @@ function msgServer(){
     }
 
     this.publicData = function(msg){ //广播
-        console.log("广播消息,连接池总数==>", )
-        
+        console.log("data all public send")
         wsPool.values().forEach(function(ws, index) {
-          data = JSON.stringify(msg);
+          let data = JSON.stringify(msg);
           ws.send(data);
         });
     };
 
     this.Privatedata = function(key,data){
+        console.log("msg data send")
         let ws = wsPool.get(key);
-        console.log("ws");
-        
         ws.send(JSON.stringify(data));
     }
 

@@ -4,7 +4,10 @@ var msgSer = new msgServer();
 var WebSocketServer = require('ws').Server,
     wss = new WebSocketServer({ port: 8080 });
 
+
 msgSer.init(); //消息队列初始化
+
+
 
 wss.on('connection', function (ws) {
     // 将该连接加入连接池
