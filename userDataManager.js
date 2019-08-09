@@ -16,15 +16,30 @@ function userDataManger(){
     var userInstance = new Dic();
 
     //data,进来必须包括两个字段，ws 的key ,和用户名字name
-    this.upUserData=function(data){
+    this.upUserData = function(data){
 
-        if(!data.name && data.name ==""){ //这个字段不存在
-            return false
-        }else{
-
-            userInstance.set(data.name,data)
-            return true 
+        if (!data.name || data.name == "" ) {
+          //这个字段不存在
+          return false;
+        } else {
+            if (userInstance.get(data.name) === undefined){
+                userInstance.set(data.name, this.baseUseData(data));
+            }else{
+                userInstance.get(data.name).uid = data.uid; //更新keys 
+                userInstance.get(data.name).status = 1;     //更新在线状态
+            }
+          return true;
         }
+    }
+
+    this.baseUseData =function(data){
+        let tempdata = {
+            uid: data.uid,
+            name:data.name,
+            status:1,
+            msg:{}
+        }
+        return tempdata
     }
 
     this.HRpackage =function(name){ //心跳包
@@ -36,6 +51,7 @@ function userDataManger(){
         let data = {
             keys: userInstance.get(name).uid,
             name: name,
+            status: 1,
             HR : 0x11
         }
         return data;

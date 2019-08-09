@@ -8,22 +8,26 @@ var gameloginSer = require('./gameLoginServer')
 function gameServer(){  
 
     var userData = new userDataManger()
-    var gameloginSer = new gameloginSer();
+    var gameLoginServer = new gameloginSer(userData);
+    // var gameloginSer = new gameloginSer();
 
-    gameloginSer.init(userDataManger);
+    
 
     this.dataGamedeal=function(data,dataQue){
         
         //数据清洗，储存成功 则调用游戏服务器中处理游戏逻辑 
         //不成功则返回
         if (userData.upUserData(data)) {
-            gameloginSer.dealwithdata(data.name);
-            
+            console.log(data); 
+            let tempdata = gameLoginServer.dealwithdata(data.name);
+
+            dataQue.enqueue(tempdata);
+
+            return true; 
+
         } else {
-
+            return false;
         }
-
-        return tempData;
     }
 }
 module.exports = gameServer;

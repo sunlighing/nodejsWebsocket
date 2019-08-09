@@ -72,14 +72,24 @@ function msgServer(){
      * 2.当套接字正常断开 deleteValue 也只调用一次 
      */
     this.delectWs = function(ws) {
+        console.log("close the ws")
+        
         if (ws.readyState != 3){
             ws.close()
         }else{
             let key = wsPool.deleteValue(ws);
             que.enqueue(key);
         }
-
     };
+    /**
+     * 删除ws，根据key去删除
+     */
+    this.delectWsWithKey = function(key){
+        wsPool.get(key) == undefined
+          ? console.log("can't close the ws")
+          : this.delectWs(wsPool.get(key));
+        
+    }
 
     this.getMsgQue = function (){  //利用闭包
         return msgQue;
