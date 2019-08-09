@@ -21,22 +21,29 @@
  *                        }
  *            }
  */
+var dataQueue = require("./lib/queue")
 
 function dataManager(msgServer,gamserver){
+    
+    var dataQue = new dataQueue(); //收到游戏消息队列  
+
     this.msgSer = msgServer;
     this.gamser = gamserver;
     
     this.dealWithData = function(){  
-        let data = msgServer.getMsgQue().front(); //从队列中取到数据包后，
-        msgServer.getMsgQue().dequeue(); 
+        let data = this.msgSer.getMsgQue().front(); //从队列中取到数据包后，
+        this.msgSer.getMsgQue().dequeue(); 
 
-        let tempdata = gamserver.dataset(data);
-        msgServer.getMsgQue().privateSend(data.uid,tempdata); //经过加工后的数据包
+        let tempdata = this.gamser.dataset(data, dataQue);
+
+        this.msgSer.getMsgQue().privateSend(data.uid, tempdata); //经过加工后的数据包
 
     }
 
-    this.closeConnect = function(){  //关闭的时候将用户改变
 
+
+    this.closeConnect = function(){  //关闭的时候将用户改变
+         
     }
 }
 
