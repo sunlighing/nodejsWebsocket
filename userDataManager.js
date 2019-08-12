@@ -38,9 +38,10 @@ function userDataManger(){
 
     this.baseUseData =function(data){
         let tempdata = {
-            uid: data.uid,
+            keys: data.keys,
             name:data.name,
             status:1,
+            act:0x00,
             msg:{}
         }
         return tempdata

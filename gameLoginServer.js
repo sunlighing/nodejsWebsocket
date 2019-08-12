@@ -6,10 +6,10 @@ function gameLoginServer(userdata){
 
   this.userdt = userdata;
 
-  this.dealwithdata = function(name) {
+  this.dealwithdata = function(data) {
 
-    console.log("data gameLoginServer =>", name);
-    let tempdata = userdata.HRpackage(name); //
+    console.log("data gameLoginServer =>", data.name);
+    let tempdata = userdata.HRpackage(data.name); //
     console.log("tempdata gameLoginServer =>", tempdata);
     if (tempdata != null) {
       return tempdata;

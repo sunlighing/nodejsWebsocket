@@ -20,7 +20,7 @@ function gameServer(){
         if (userData.upUserData(data)) {
             console.log(data); 
             
-            let tempdata = gameLoginServer.dealwithdata(data.name);
+            let tempdata = gameLoginServer.dealwithdata(data);
             console.log("数据清洗成功 gameServerUse",tempdata);
             dataQue.enqueue(tempdata);
 
