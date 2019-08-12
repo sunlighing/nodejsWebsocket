@@ -19,13 +19,16 @@ function gameServer(){
         //不成功则返回
         if (userData.upUserData(data)) {
             console.log(data); 
+            
             let tempdata = gameLoginServer.dealwithdata(data.name);
-
+            console.log("数据清洗成功 gameServerUse",tempdata);
             dataQue.enqueue(tempdata);
 
             return true; 
 
         } else {
+
+            console.log("数据清洗失败 gameServerUse");
             return false;
         }
     }

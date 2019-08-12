@@ -27,7 +27,7 @@ wss.on('connection', function (ws) {
         if (msgSer.checkWebsocket(message) === false){
             msgSer.delectWs(ws)
         }else{
-            msgSer.putmsg(message)
+            msgSer.putmsg(message);
             dataMana.dealWithData();
         }
         //发现消息包不对就关闭这个websocket连接

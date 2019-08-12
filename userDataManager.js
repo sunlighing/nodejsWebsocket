@@ -23,8 +23,12 @@ function userDataManger(){
           return false;
         } else {
             if (userInstance.get(data.name) === undefined){
+                console.log("不存在此用户 userDataManager")
+                //不存在此用户
                 userInstance.set(data.name, this.baseUseData(data));
             }else{
+                console.log("存在此用户 userDataManager");
+                //此用户已存在
                 userInstance.get(data.name).uid = data.uid; //更新keys 
                 userInstance.get(data.name).status = 1;     //更新在线状态
             }
@@ -45,6 +49,7 @@ function userDataManger(){
     this.HRpackage =function(name){ //心跳包
 
         if (userInstance.get(name) ===undefined){  //没有这个数据返回空
+            console.log("userInstance.get", name, userInstance.get(name));
             return null 
         }
 
@@ -52,7 +57,7 @@ function userDataManger(){
             keys: userInstance.get(name).uid,
             name: name,
             status: 1,
-            HR : 0x11
+            act : 0x11
         }
         return data;
     }

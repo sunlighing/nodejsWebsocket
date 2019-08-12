@@ -34,12 +34,12 @@ function dataManager(msgServer,gamserver){
         let data = this.msgSer.getMsgQue().front(); //从队列中取到数据包后，
         this.msgSer.getMsgQue().dequeue(); 
         
-        if (this.gamser.dataGamedeal(data, dataQue) == true && data.uid) {
+        if (this.gamser.dataGamedeal(data, dataQue) == true ) {
             this.msgSer.getMsgQue().privateSend(data.uid, dataQue.front());
             dataQue.dequeue();
         } else {
           //未知原因
-
+            
           this.closeConnect(data.uid);
         };
 
@@ -51,7 +51,7 @@ function dataManager(msgServer,gamserver){
 
     this.closeConnect = function(key){  //关闭的时候将用户改变
         console.log("the ws must close",key)
-        !key ? this.msgSer.delectWsWithKey(key) : console.log("eorrer");
+        key ? this.msgSer.delectWsWithKey(key) : console.log("eorrer");
         
     }
 }

@@ -27,7 +27,7 @@ function msgServer(){
         if (wsPool.get(key) === undefined) {
             wsPool.set(key, ws);
             let data = {
-                uid: key
+                keys: key
             };
             this.Privatedata(key, data);
         } else {
@@ -45,7 +45,9 @@ function msgServer(){
     this.checkWebsocket = function(msg) {
         //有漏洞如果别人冒用的话会有问题
         let data = JSON.parse(msg);
+
         if (wsPool.get(data.uid) === undefined) {
+            console.log("data.uid ====> underfind")
             return false;
         } else {
             return true;
@@ -62,7 +64,7 @@ function msgServer(){
     };
 
     this.Privatedata = function(key,data) {
-        console.log("msg data send",key);
+        console.log("msg data send msgServer",key,data);
         
         let ws = wsPool.get(key);
         ws.send(JSON.stringify(data));
