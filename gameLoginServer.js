@@ -11,11 +11,13 @@ function gameLoginServer(userdata){
     console.log("data gameLoginServer =>", data.name);
     let tempdata = userdata.HRpackage(data.name); //
     console.log("tempdata gameLoginServer =>", tempdata);
+    
     if (tempdata != null) {
       return tempdata;
     }else{
       return null
     }
+
   };
 
 
