@@ -2,7 +2,8 @@ nodejsWebsocket轻量级游戏服务器
 
 nodejs 基于websocket 的轻量级游戏服务器  
  
-# 项目结构: app.js //主入口;  
+# 项目结构:  
+         app.js //主入口;  
          msgQueue.js //消息队列管理;  
          msgServer.js //套接字管理;  
          gameServer.js //游戏逻辑管理;  
