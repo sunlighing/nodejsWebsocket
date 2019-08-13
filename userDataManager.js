@@ -42,6 +42,7 @@ function userDataManger(){
             name:data.name,
             status:1,
             act:0x00,
+            chatMsg:"hello",
             msg:{}
         }
         return tempdata

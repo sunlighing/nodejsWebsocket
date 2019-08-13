@@ -10,7 +10,7 @@
  * }
  * 
  * 0x12 聊天信息
- * 
+ * 大厅聊天，和房间聊天一样的
  * {
  *    name
  *    keys 
@@ -23,11 +23,30 @@
  *    }
  * }
  * 
- * 0x13 
+ * 0x13 设置信息
  * 
  * {
- * 
+ *    name 
+ *    keys 
+ *    act :0x13 
+ *    msg:{
+ *        }
  * }
+ * 
+ * 0x14 在线匹配房间
+ * 功能：用户请求匹配房间，待开房列表正好有同样的人在等着，这时候会两个用户匹配成功，创建一个room服务两个会放进去开始游戏
+ * 待开房列表没有人，这是后就会一直等着，直到有回应，另一个用户匹配成功，会给这两货发消息，匹配成功
+ * {
+ *    name 
+ *    keys 
+ *    act :0x14 
+ *    msg:{
+ *            
+ *        }
+ * }
+ * 
+ * 游戏服务的信息另外写
+ * 
  * 
  */
 var dataDine = require("./lib/useractionDine")
@@ -58,7 +77,7 @@ function gameLoginServer(userdata){
     if (data.act == dataDine.loginEvent){
 
     }else{
-
+      this.chatData(data);
     }
   };
 
@@ -67,6 +86,8 @@ function gameLoginServer(userdata){
 
     }
   }
+
+
 
 
 }
