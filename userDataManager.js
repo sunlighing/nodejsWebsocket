@@ -27,9 +27,12 @@ function userDataManger(){
                 //不存在此用户
                 userInstance.set(data.name, this.baseUseData(data));
             }else{
-                console.log("存在此用户 userDataManager");
+                console.log(
+                  "存在此用户 userDataManager",
+                  data.keys
+                );
                 //此用户已存在
-                userInstance.get(data.name).uid = data.uid; //更新keys 
+                userInstance.get(data.name).keys = data.keys; //更新keys 
                 userInstance.get(data.name).status = 1;     //更新在线状态
             }
           return true;
@@ -54,9 +57,9 @@ function userDataManger(){
             console.log("userInstance.get", name, userInstance.get(name));
             return null 
         }
-
+        console.log(userInstance.get(name).keys);
         let data = {
-            keys: userInstance.get(name).uid,
+            keys: userInstance.get(name).keys,
             name: name,
             status: 1,
             act : 0x11

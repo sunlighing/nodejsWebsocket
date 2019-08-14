@@ -21,6 +21,7 @@ function msgServer(){
     };
 
     this.putws = function(ws) {
+
         let key = que.front()  //取第一个
         que.dequeue();        //移除第一个
         //这样有个问题就是当队列位空时， 就连接上了
@@ -46,8 +47,8 @@ function msgServer(){
         //有漏洞如果别人冒用的话会有问题
         let data = JSON.parse(msg);
 
-        if (wsPool.get(data.uid) === undefined) {
-            console.log("data.uid ====> underfind")
+        if (wsPool.get(data.keys) === undefined) {
+            console.log("data.keys ====> underfind")
             return false;
         } else {
             return true;

@@ -35,12 +35,12 @@ function dataManager(msgServer,gamserver){
         this.msgSer.getMsgQue().dequeue(); 
         
         if (this.gamser.dataGamedeal(data, dataQue) == true ) {
-            this.msgSer.getMsgQue().privateSend(data.uid, dataQue.front());
+            this.msgSer.getMsgQue().privateSend(data.keys, dataQue.front());
             dataQue.dequeue();
         } else {
           //未知原因
             
-          this.closeConnect(data.uid);
+          this.closeConnect(data.keys);
         };
 
          //经过加工后的数据包
