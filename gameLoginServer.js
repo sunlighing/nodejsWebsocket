@@ -65,12 +65,21 @@
  * 0x16:   自动结束游戏，关闭游戏服务
  * 
  */
-var dataDine = require("./lib/useractionDine")
+
 
 var gameS = require("./gameServeMannager")
 
 function gameLoginServer(userdata){
   //这里可以用责任链模式
+
+  var clientDataDine = {
+    loginEvent: 0x11,
+    chatEvent: 0x12,
+    processOver: 0x13,
+    matchingRoom: 0x14,
+    gameIngData: 0x15,
+    gameOver:  0x16,
+  }
 
   this.userdt = userdata;
 
@@ -91,19 +100,18 @@ function gameLoginServer(userdata){
     }
 
   };
+
   //返回数据带erros 
   this.loginData = function(data){  //登录信息处理
-    if (data.act == dataDine.loginEvent){
-      alert(data.act);
-      alert(data.name);
-      alert(data.keys);
+    console.log("gameLoginServe loginEvent",data.act === clientDataDine.loginEvent);
 
-      let tempdata = this.baseUseData(data);
-      tempdata.act = dataDine.loginEvent;
+    if (data.act == clientDataDine.loginEvent) {
+
+      let tempdata = this.userdt.baseUseData(data.name);
+      tempdata.act = clientDataDine.loginEvent;
       tempdata.errors = 1;
-      return tempdata;
-      
-    }else{
+      return { tempdata };
+    } else {
       return this.chatData(data);
     }
   };
@@ -111,23 +119,37 @@ function gameLoginServer(userdata){
   
 
   this.chatData = function(data){  //聊天信息
-    if (data.act == dataDine.chatEvent){
-
-    }else{
+    if (data.act == clientDataDine.chatEvent) {
+    } else {
       return this.matchingRoom(data);
     }
   }
 
   this.matchingRoom = function(data){
-    if (data.act === dataDine.matchingRoom){
-      let tempdata = this.baseUseData(data);
-      tempdata.act = dataDine.matchingRoom;
-      tempdata.errors = 1;
-      tempdata.msg = gameServece.matchRoom(data.name)
-       
-        
-    }else {
-      return null
+    console.log("gameLoginServe matchingRoom", data.act === clientDataDine.matchingRoom)
+    if (data.act === clientDataDine.matchingRoom) {
+      let roomdata = gameServece.matchRoom(data.name);
+      if (roomdata != null) {
+        let data1 = this.userdt.baseUseData(roomdata.p1);
+        data1.msg = { enomy: roomdata.p2, room: roomdata.room };
+
+        let data2 = this.userdt.baseUseData(roomdata.p2);
+        data2.msg = { enomy: roomdata.p1, room: roomdata.room };
+
+        data1.act = clientDataDine.matchingRoom;
+        data2.act = clientDataDine.matchingRoom;
+
+        return {
+          data1,
+          data2
+        };
+      }else{
+        return null;
+      }
+
+      
+    } else {
+      return null;
     } 
 
   }

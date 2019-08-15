@@ -11,23 +11,24 @@ function gameSeverManager(){
      * 
      */
     this.matchRoom=function(name){
-        if( matchRoomList.length > 0 ){
+        console.log(
+          "gameServeMannger == > matchRoomList.length",matchRoomList.size());
+        if( matchRoomList.size() > 0 ){
             //创建房间。初始化参数
             let player1 = matchRoomList.front();
             let roomName = this.rodomRoom();
             let roomGame = new roomGameServer();
-            roomGameServer.init(player1, name, roomName);
+            roomGame.init(player1, name, roomName);
             RoomData.set(roomName, roomGame);
             matchRoomList.dequeue();
             return {
-                enoemy: player1,
+                p1: player1,
+                p2: name,
                 room: roomName,
             }
         }else{
             matchRoomList.enqueue(name);
-            return {
-                
-            }
+            return null;
         }
     }
 

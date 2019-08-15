@@ -35,8 +35,7 @@ function dataManager(msgServer,gamserver){
         this.msgSer.getMsgQue().dequeue(); 
         
         if (this.gamser.dataGamedeal(data, dataQue) == true ) {
-            this.msgSer.getMsgQue().privateSend(data.keys, dataQue.front());
-            dataQue.dequeue();
+            this.sendDatainData();
         } else {
           //未知原因
             
@@ -48,7 +47,12 @@ function dataManager(msgServer,gamserver){
     }
 
     this.sendDatainData =function(){
-            
+        console.log("dataManager", dataQue.isEmpty())
+        if(dataQue.isEmpty()==false){
+            this.msgSer.getMsgQue().privateSend(dataQue.front().keys, dataQue.front());
+            dataQue.dequeue();
+            this.sendDatainData();
+        }
     };
 
 

@@ -25,7 +25,6 @@ function msgQueue() {
     }
 
     this.privateSend = function(key,data){
-        console.log("key=>",key,"data",data)
         msgserver.Privatedata(key,data);
 
     }

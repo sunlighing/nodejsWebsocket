@@ -65,7 +65,7 @@ function msgServer(){
     };
 
     this.Privatedata = function(key,data) {
-        console.log("msg data send msgServer",key,data);
+        console.log("msg data send msgServer",key);
         
         let ws = wsPool.get(key);
         ws.send(JSON.stringify(data));
