@@ -13,7 +13,7 @@ function gameSeverManager(){
     this.matchRoom=function(name){
         console.log(
           "gameServeMannger == > matchRoomList.length",matchRoomList.size());
-        if( matchRoomList.size() > 0 ){
+        if (matchRoomList.size() > 0 && name != matchRoomList.front() ){
             //创建房间。初始化参数
             let player1 = matchRoomList.front();
             let roomName = this.rodomRoom();
