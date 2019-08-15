@@ -38,16 +38,17 @@ function userDataManger(){
           return true;
         }
     }
-
+    //errors = 1 
     this.baseUseData =function(data){
         let tempdata = {
-            keys: data.keys,
-            name:data.name,
-            status:1,
-            act:0x00,
-            chatMsg:"hello",
-            msg:{}
-        }
+          keys: data.keys,
+          name: data.name,
+          status: 1,
+          errors: 1,
+          act: 0x00,
+          chatMsg: "hello",
+          msg: {}
+        };
         return tempdata
     }
 

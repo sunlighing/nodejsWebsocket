@@ -67,19 +67,22 @@
  */
 var dataDine = require("./lib/useractionDine")
 
+var gameS = require("./gameServeMannager")
 
 function gameLoginServer(userdata){
   //这里可以用责任链模式
 
   this.userdt = userdata;
 
+  var gameServece = new gameS();
+
   this.dealwithdata = function(data) {
 
     console.log("data gameLoginServer =>", data.name);
-    let tempdata = userdata.HRpackage(data.name); //
-    console.log("tempdata gameLoginServer =>", tempdata);
+    // let tempdata = userdata.HRpackage(data.name); //
+    // console.log("tempdata gameLoginServer =>", tempdata);
     
-
+    let tempdata = this.loginData(data)
 
     if (tempdata != null) {
       return tempdata;
@@ -88,22 +91,45 @@ function gameLoginServer(userdata){
     }
 
   };
-
+  //返回数据带erros 
   this.loginData = function(data){  //登录信息处理
     if (data.act == dataDine.loginEvent){
       alert(data.act);
       alert(data.name);
-      alert(data.keys)
+      alert(data.keys);
+
+      let tempdata = this.baseUseData(data);
+      tempdata.act = dataDine.loginEvent;
+      tempdata.errors = 1;
+      return tempdata;
       
     }else{
-      this.chatData(data);
+      return this.chatData(data);
     }
   };
+
+  
 
   this.chatData = function(data){  //聊天信息
     if (data.act == dataDine.chatEvent){
 
+    }else{
+      return this.matchingRoom(data);
     }
+  }
+
+  this.matchingRoom = function(data){
+    if (data.act === dataDine.matchingRoom){
+      let tempdata = this.baseUseData(data);
+      tempdata.act = dataDine.matchingRoom;
+      tempdata.errors = 1;
+      tempdata.msg = gameServece.matchRoom(data.name)
+       
+        
+    }else {
+      return null
+    } 
+
   }
 
 

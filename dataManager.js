@@ -47,6 +47,11 @@ function dataManager(msgServer,gamserver){
 
     }
 
+    this.sendDatainData =function(){
+            
+    };
+
+
 
     this.closeConnect = function(key){  //关闭的时候将用户改变
         console.log("the ws must close",key)
