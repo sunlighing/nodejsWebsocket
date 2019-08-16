@@ -11,14 +11,15 @@ function gameSeverManager(){
      * 
      */
     this.matchRoom=function(name){
-        console.log(
-          "gameServeMannger == > matchRoomList.length",matchRoomList.size());
+        console.log("gameServeMannger == > matchRoomList.length",matchRoomList.size());
+
         if (matchRoomList.size() > 0 && name != matchRoomList.front() ){
             //创建房间。初始化参数
             let player1 = matchRoomList.front();
             let roomName = this.rodomRoom();
             let roomGame = new roomGameServer();
             roomGame.init(player1, name, roomName);
+            
             RoomData.set(roomName, roomGame);
             matchRoomList.dequeue();
             return {
@@ -39,6 +40,12 @@ function gameSeverManager(){
             return rooName;
         }else{
             this.rodomRoom();
+        }
+    }
+
+    this.getCard = function(roomName,name){
+        if (RoomData.get(roomName) != undefined){
+            RoomData.get(roomName).getCard(name);
         }
     }
 

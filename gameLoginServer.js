@@ -146,13 +146,32 @@ function gameLoginServer(userdata){
       }else{
         return null;
       }
-
-      
     } else {
-      return null;
+      this.gameGetCard(data)
     } 
-
   }
+
+  this.gameGetCard =function(data){
+    if (data.act = clientDataDine.gameIngData){
+          if(data.msg.act == 0x01){ //得到一张牌
+            let msg = gameServece.getCard(data.msg.room,data.name)
+            let data1 = this.userdt.baseUseData(data.name);
+            data1.act = clientDataDine.gameIngData;
+            data1.msg = msg;
+            return data1
+          }else if(data.msg.act == 0x02){ //比牌游戏结束
+            
+          }
+    }else{
+      this.noget(data)
+    }
+  }
+
+
+  this.noget= function(data){
+    return null;
+  }
+
 
 
 

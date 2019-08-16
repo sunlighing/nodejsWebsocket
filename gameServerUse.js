@@ -22,14 +22,12 @@ function gameServer(){
             
             let tempdata = gameLoginServer.dealwithdata(data);
 
-
             console.log("数据清洗成功 gameServerUse",tempdata);
             if (tempdata !=null){
                 for (let k in tempdata){
                     dataQue.enqueue(tempdata[k]);
                 }
             }
-            
             
             return true; 
 
