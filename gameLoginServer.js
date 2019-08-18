@@ -147,23 +147,31 @@ function gameLoginServer(userdata){
         return null;
       }
     } else {
-      this.gameGetCard(data)
+      return this.gameGetCard(data)
     } 
   }
 
   this.gameGetCard =function(data){
+    console.log("gameLoginServe gameIngData", data.act === clientDataDine.gameIngData);
     if (data.act = clientDataDine.gameIngData){
           if(data.msg.act == 0x01){ //得到一张牌
             let msg = gameServece.getCard(data.msg.room,data.name)
             let data1 = this.userdt.baseUseData(data.name);
             data1.act = clientDataDine.gameIngData;
+            msg.act == 0x01;//得到一张牌
+            console.log(msg)
+           
             data1.msg = msg;
-            return data1
+            
+            console.log(data1);
+            return {   //封装对像
+              data1
+            }
           }else if(data.msg.act == 0x02){ //比牌游戏结束
             
           }
     }else{
-      this.noget(data)
+      return this.noget(data)
     }
   }
 

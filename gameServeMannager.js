@@ -44,8 +44,9 @@ function gameSeverManager(){
     }
 
     this.getCard = function(roomName,name){
+        console.log("gameServerMannager,roomName,name", roomName, name)
         if (RoomData.get(roomName) != undefined){
-            RoomData.get(roomName).getCard(name);
+            return RoomData.get(roomName).getCard(name);
         }
     }
 

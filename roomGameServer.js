@@ -1,19 +1,23 @@
-var card = require("./cardManager")
+var cardManager = require("./cardManager");
 function roomGame(){
     
     this.player2 = {
-        name=null,
-        card=[],
-        score=0,
+        act:0x00,
+        name:null,
+        card:[],
+        score:0,
+        msg:null,
     };
 
     this.player1={
-        name=null,
-        card=[],
-        score=0,
+        act: 0x00,
+        name:null,
+        card:[],
+        score:0,
+        msg:null,
     };
 
-    var card = new card();
+    var cardMan = new cardManager();
 
     this.roomToken = null;
 
@@ -25,11 +29,31 @@ function roomGame(){
 
     this.getCard=function(name){
         if (this.player1.name == name){
-            this.player1.card.push(card.getCard())
+            this.player1.card.push(cardMan.randomCard());
+            this.player1.act=0x01
             return this.player1
         } else if (this.player2.name == name){
-            this.player2.card.push(card.getCard())
+            this.player2.card.push(cardMan.randomCard());
+            this.player2.act = 0x01
             return this.player2
+        }
+    }
+
+    this.compareCard = function(){
+        let playerone = 0 
+        for (let k in this.player1.card){
+            playerone = playerone + this.player1.card[k];
+        }
+
+        let playertwo = 0 
+        for(let k in this.player2.card){
+            playertwo = playertwo + this.player2.card[k];
+        }
+
+        if (playerone >= playertwo ){
+            return 
+        }else{
+            return  
         }
     }
     
