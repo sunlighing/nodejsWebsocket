@@ -21,7 +21,6 @@ function msgServer(){
     };
 
     this.putws = function(ws) {
-
         let key = que.front()  //取第一个
         que.dequeue();        //移除第一个
         //这样有个问题就是当队列位空时， 就连接上了
@@ -65,7 +64,7 @@ function msgServer(){
     };
 
     this.Privatedata = function(key,data) {
-        console.log("msg data send msgServer",key);
+    
         
         let ws = wsPool.get(key);
         ws.send(JSON.stringify(data));
@@ -81,6 +80,7 @@ function msgServer(){
             ws.close()
         }else{
             let key = wsPool.deleteValue(ws);
+            console.log("key ==>",key)
             que.enqueue(key);
         }
     };
@@ -99,7 +99,8 @@ function msgServer(){
     }
 
     this.getKeys = function(ws){
-        
+
+        return wsPool.getKeys(ws)
     };
 }
 

@@ -106,18 +106,27 @@ function gameLoginServer(userdata){
     console.log("gameLoginServe loginEvent",data.act === clientDataDine.loginEvent);
 
     if (data.act == clientDataDine.loginEvent) {
-      if (this.userdt.setUserOnline(data.name)){
-        this.userdt.setUserOnline(data.name);
-        let tempdata = this.userdt.baseUseData(data.name);
-        tempdata.act = clientDataDine.loginEvent;
-        tempdata.errors = 1;
-        return { tempdata };
-      }else{
-        return {
-            error:0x02
+      if (this.userdt.checkOnline(data.name) == true) {
+        
+        let tempdata = this.userdt.getUserData(data.name);
+        if (tempdata != null){
+
+            tempdata.act = clientDataDine.loginEvent;
+            tempdata.errors = 1;
+            this.userdt.setUserOnline(data); 
+            return { tempdata };
+        
+        }else{
+            return this.noget()
         }
-      }
-      
+
+      } else {
+        let tempdata = {keys:data.keys,errors : 0x02}
+        return {
+          tempdata
+        }
+    };
+    
     } else {
       return this.chatData(data);
     }

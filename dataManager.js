@@ -21,6 +21,7 @@
  *                        }
  *            }
  */
+
 var dataQueue = require("./lib/queue")
 
 function dataManager(msgServer,gamserver){
@@ -55,10 +56,9 @@ function dataManager(msgServer,gamserver){
         }
     };
 
-
-
     this.closeConnect = function(key){  //关闭的时候将用户改变
         console.log("the ws must close",key)
+        console.log(" dataManager closeConnect =>", key)
         //key ? this.msgSer.delectWsWithKey(key) : console.log("eorrer");
         this.gamser.delectUserWithKeys(key);
     }

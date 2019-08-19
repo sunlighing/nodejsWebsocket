@@ -23,6 +23,7 @@ function userDataManger(){
         if (!data.name || data.name == "" ) {
           //这个字段不存在
           return false;
+
         } else {
             if (userInstance.get(data.name) === undefined){
                 console.log("不存在此用户 userDataManager")
@@ -41,7 +42,7 @@ function userDataManger(){
         return {
             keys: data.keys,
             name: data.name,
-            status: 1,
+            status: 0,
             errors: 1,
             act: 0x00,
             chatMsg: "hello",
@@ -52,8 +53,8 @@ function userDataManger(){
     this.baseUseData =function(name){
         let tempdata = {
           keys: userInstance.get(name).keys,
-          name: data.name,
-          status: 1,
+          name: name,
+          status: 0,
           errors: 1,
           act: 0x00,
           chatMsg: "hello",
@@ -72,21 +73,25 @@ function userDataManger(){
         let data = {
             keys: userInstance.get(name).keys,
             name: name,
-            status: 1,
+            status: 0,
             act : 0x11
         }
         return data;
     }
 
     this.checkOnline=function(name){
-        if (userInstance.get(name).status == 0){
-            return true 
-        }else{
-            return false 
+        console.log("userDataManager  checkOnline => ",name)
+        console.log("userDataManager  checkOnline => ",userInstance.get(name).status);
+        if (userInstance.get(name).status == 0) {
+          return true;
+        } else {
+          return false;
         };
     }
 
     this.setUserOnline = function(data){
+        console.log("userDataManager ==> setUserOnline",data.name,data.keys,);
+        console.log("userDataManager ==> setUserOnline", userInstance.get(data.name));
         userInstance.get(data.name).status = 1;
         onlineUserMannager.set(data.keys,data.name);
     }
@@ -99,6 +104,14 @@ function userDataManger(){
         }
     }
 
+    this.getUserData = function(name){
+        if (userInstance.get(name) != undefined){
+            return userInstance.get(name);
+        }else {
+            return null
+        }
+         
+    }
 
 }
 
