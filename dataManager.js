@@ -59,8 +59,8 @@ function dataManager(msgServer,gamserver){
 
     this.closeConnect = function(key){  //关闭的时候将用户改变
         console.log("the ws must close",key)
-        key ? this.msgSer.delectWsWithKey(key) : console.log("eorrer");
-        
+        //key ? this.msgSer.delectWsWithKey(key) : console.log("eorrer");
+        this.gamser.delectUserWithKeys(key);
     }
 }
 

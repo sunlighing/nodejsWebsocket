@@ -34,8 +34,11 @@ wss.on('connection', function (ws) {
     });
 
     ws.on('close', function (message) {
+        let keys = msgSer.getKeys(ws);
+        dataMana.closeConnect(keys);
         // 连接关闭时，将其移出连接池
         msgSer.delectWs(ws);
+        
         console.log("close the ws",message);
     });
 

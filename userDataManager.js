@@ -15,6 +15,8 @@ var Dic = require("./lib/Dictionary");
 function userDataManger(){
     var userInstance = new Dic();
 
+    var onlineUserMannager = new Dic()
+
     //data,进来必须包括两个字段，ws 的key ,和用户名字name
     this.upUserData = function(data){
 
@@ -27,13 +29,10 @@ function userDataManger(){
                 //不存在此用户
                 userInstance.set(data.name,this.baseData(data));
             }else{
-                console.log(
-                  "存在此用户 userDataManager",
-                  data.keys
-                );
+                console.log("存在此用户 userDataManager",data.keys);
                 //此用户已存在
                 userInstance.get(data.name).keys = data.keys; //更新keys 
-                userInstance.get(data.name).status = 1;     //更新在线状态
+                //userInstance.get(data.name).status = 1;     //更新在线状态
             }
           return true;
         }
@@ -53,7 +52,7 @@ function userDataManger(){
     this.baseUseData =function(name){
         let tempdata = {
           keys: userInstance.get(name).keys,
-          name: name,
+          name: data.name,
           status: 1,
           errors: 1,
           act: 0x00,
@@ -78,6 +77,28 @@ function userDataManger(){
         }
         return data;
     }
+
+    this.checkOnline=function(name){
+        if (userInstance.get(name).status == 0){
+            return true 
+        }else{
+            return false 
+        };
+    }
+
+    this.setUserOnline = function(data){
+        userInstance.get(data.name).status = 1;
+        onlineUserMannager.set(data.keys,data.name);
+    }
+    
+    this.setUserTapeOut = function(keys){
+        let name = onlineUserMannager.get(keys);
+        if (name != undefined){
+            userInstance.get(name).status = 0;
+            onlineUserMannager.delete(keys);
+        }
+    }
+
 
 }
 

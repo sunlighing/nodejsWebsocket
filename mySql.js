@@ -8,7 +8,7 @@ function mySql(){
     var db = mysql.createConnection({
         host:'94.34.122.32',
         user:"root",
-        password:"ding1234",
+       
         database:'gameDB'
     })
 

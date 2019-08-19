@@ -38,9 +38,9 @@ function msgServer(){
     };
 
     this.putmsg = function(msg) {
-    //解包
-    let data = JSON.parse(msg);
-    msgQue.enqueue(data);
+        //解包
+        let data = JSON.parse(msg);
+        msgQue.enqueue(data);
     };
 
     this.checkWebsocket = function(msg) {
@@ -97,6 +97,10 @@ function msgServer(){
     this.getMsgQue = function (){  //利用闭包
         return msgQue;
     }
+
+    this.getKeys = function(ws){
+        
+    };
 }
 
 module.exports = msgServer;

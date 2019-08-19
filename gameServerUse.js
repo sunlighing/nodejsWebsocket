@@ -37,5 +37,10 @@ function gameServer(){
             return false;
         }
     }
+
+    this.delectUserWithKeys = function(keys){
+        userData.setUserTapeOut(keys)
+    }
+    
 }
 module.exports = gameServer;
