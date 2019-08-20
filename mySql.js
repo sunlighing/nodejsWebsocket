@@ -6,7 +6,7 @@ var mysql = require('mysql')
 function mySql(){
 
     var db = mysql.createConnection({
-        host:'94.34.122.32',
+        host:'',
         user:"root",
        
         database:'gameDB'
