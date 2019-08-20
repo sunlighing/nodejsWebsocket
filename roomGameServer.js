@@ -26,8 +26,8 @@ function roomGame(){
         this.player2.name = p2;
         this.roomToken = roomname;
     }
-
-    this.getCard=function(name){
+    
+    this.getCard = function(name){
         if (this.player1.name == name){
             this.player1.card.push(cardMan.randomCard());
             this.player1.act=0x01

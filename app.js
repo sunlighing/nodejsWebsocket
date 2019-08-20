@@ -17,8 +17,6 @@ var dataMana = new dataManage(msgSer, gameMan);
 
 
 
-
-
 wss.on('connection', function (ws) {
     msgSer.putws(ws);  //第一次链接的是时候会分配key
     

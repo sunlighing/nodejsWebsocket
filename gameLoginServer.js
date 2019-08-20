@@ -132,8 +132,6 @@ function gameLoginServer(userdata){
     }
   };
 
-  
-
   this.chatData = function(data){  //聊天信息
     if (data.act == clientDataDine.chatEvent) {
     } else {
@@ -195,10 +193,6 @@ function gameLoginServer(userdata){
   this.noget= function(data){
     return null;
   }
-
-
-
-
 
 }
 

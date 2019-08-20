@@ -39,12 +39,9 @@ function dataManager(msgServer,gamserver){
             this.sendDatainData();
         } else {
           //未知原因
-            
           this.closeConnect(data.keys);
         };
-
          //经过加工后的数据包
-
     }
 
     this.sendDatainData =function(){

@@ -8,9 +8,10 @@ function gameSeverManager(){
 
     var matchRoomList = new queue();  //等待匹配的列表
     /**
-     * 
+     * 1,匹配房间。2,
      */
     this.matchRoom=function(name){
+
         console.log("gameServeMannger == > matchRoomList.length",matchRoomList.size());
 
         if (matchRoomList.size() > 0 && name != matchRoomList.front() ){
@@ -19,9 +20,10 @@ function gameSeverManager(){
             let roomName = this.rodomRoom();
             let roomGame = new roomGameServer();
             roomGame.init(player1, name, roomName);
-            
+
             RoomData.set(roomName, roomGame);
             matchRoomList.dequeue();
+            
             return {
                 p1: player1,
                 p2: name,
