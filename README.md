@@ -15,3 +15,6 @@ nodejs 基于 websocket 的轻量级游戏服务器
          roomGameServer.js //游戏房间管理
          cardMananger.js //卡牌管理
          gameServerMannager.js //游戏服务管理
+         
+# 项目启动:
+         node app.js //启动
